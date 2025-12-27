@@ -122,7 +122,7 @@ def add_review(request):
     else:
         return JsonResponse({"status":403,"message":"Unauthorized"})
 
-
+# Create a `get_cars` view to return a list of cars
 def get_cars(request):
     count = CarMake.objects.filter().count()
     print(count)
