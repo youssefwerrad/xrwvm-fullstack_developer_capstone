@@ -94,17 +94,32 @@ def get_dealerships(request, state="All"):
 # Create a `get_dealer_reviews` view to render the reviews of a dealer
 def get_dealer_reviews(request,dealer_id):
     # if dealer id has been provided
-    if(dealer_id):
-        endpoint = "/fetchReviews/dealer/"+str(dealer_id)
+    if dealer_id:
+        endpoint = "/fetchReviews/dealer/" + str(dealer_id)
         reviews = get_request(endpoint)
+        
+        # FIX 1: Check if reviews is None or empty
+        if not reviews:
+            return JsonResponse({"status": 200, "reviews": []})
+        
         for review_detail in reviews:
-            response = analyze_review_sentiments(review_detail['review'])
-            print(response)
-            review_detail['sentiment'] = response['sentiment']
-        return JsonResponse({"status":200,"reviews":reviews})
+            try:
+                response = analyze_review_sentiments(review_detail['review'])
+                print(response)
+                
+                # FIX 2: Check if response is None before accessing it
+                if response and 'sentiment' in response:
+                    review_detail['sentiment'] = response['sentiment']
+                else:
+                    review_detail['sentiment'] = 'neutral'
+                    
+            except Exception as e:
+                print(f"Error analyzing sentiment: {e}")
+                review_detail['sentiment'] = 'neutral'
+        
+        return JsonResponse({"status": 200, "reviews": reviews})
     else:
-        return JsonResponse({"status":400,"message":"Bad Request"})
-
+        return JsonResponse({"status": 400, "message": "Bad Request"})
 
 # Create a `get_dealer_details` view to render the dealer details
 def get_dealer_details(request, dealer_id):
@@ -117,16 +132,49 @@ def get_dealer_details(request, dealer_id):
 
 # Create a `add_review` view to submit a review
 def add_review(request):
-    if(request.user.is_anonymous == False):
+    if request.user.is_anonymous == False:
         data = json.loads(request.body)
         try:
+            # Add user's name to the review
+            data["name"] = f"{request.user.first_name} {request.user.last_name}"
+            
+            # Analyze sentiment
+            if data.get("review"):
+                sentiment_response = analyze_review_sentiments(data["review"])
+                print(f"Sentiment response: {sentiment_response}")
+                
+                if sentiment_response and 'sentiment' in sentiment_response:
+                    data["sentiment"] = sentiment_response["sentiment"]
+                else:
+                    data["sentiment"] = "neutral"
+            
+            # Post review to MongoDB
+            print(f"Posting review: {data}")
             response = post_review(data)
-            return JsonResponse({"status":200})
-        except:
-            return JsonResponse({"status":401,"message":"Error in posting review"})
+            print(f"Backend response: {response}")
+            
+            if response:
+                return JsonResponse({
+                    "status": 200,
+                    "message": "Review posted successfully"
+                })
+            else:
+                return JsonResponse({
+                    "status": 500,
+                    "message": "Failed to post review to backend"
+                })
+                
+        except Exception as e:
+            print(f"Error in add_review: {e}")
+            return JsonResponse({
+                "status": 401,
+                "message": f"Error in posting review: {str(e)}"
+            })
     else:
-        return JsonResponse({"status":403,"message":"Unauthorized"})
-
+        return JsonResponse({
+            "status": 403,
+            "message": "Unauthorized"
+        })
 
 def get_cars(request):
     count = CarMake.objects.filter().count()
