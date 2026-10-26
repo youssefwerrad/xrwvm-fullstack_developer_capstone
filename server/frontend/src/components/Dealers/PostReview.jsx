@@ -93,30 +93,38 @@ const PostReview = () => {
   return (
     <div>
       <Header/>
-      <div  style={{margin:"5%"}}>
-      <h1 style={{color:"darkblue"}}>{dealer.full_name}</h1>
-      <textarea id='review' cols='50' rows='7' onChange={(e) => setReview(e.target.value)}></textarea>
-      <div className='input_field'>
-      Purchase Date <input type="date" onChange={(e) => setDate(e.target.value)}/>
+      <main className="review-form-page">
+      <section className="review-form-card">
+      <p className="eyebrow">Share your experience</p>
+      <h1>Review {dealer.full_name}</h1>
+      <label htmlFor="review">Your review</label>
+      <textarea id='review' rows='7' placeholder="Tell us about your experience…" onChange={(e) => setReview(e.target.value)}></textarea>
+      <div className="review-form-grid">
+      <div className='form-control-group'>
+      <label htmlFor="purchase-date">Purchase date</label>
+      <input id="purchase-date" type="date" onChange={(e) => setDate(e.target.value)}/>
       </div>
-      <div className='input_field'>
-      Car Make 
-      <select name="cars" id="cars" onChange={(e) => setModel(e.target.value)}>
-      <option value="" selected disabled hidden>Choose Car Make and Model</option>
+      <div className='form-control-group'>
+      <label htmlFor="cars">Car make and model</label>
+      <select name="cars" id="cars" defaultValue="" onChange={(e) => setModel(e.target.value)}>
+      <option value="" disabled>Choose a car</option>
       {carmodels.map(carmodel => (
-          <option value={carmodel.CarMake+" "+carmodel.CarModel}>{carmodel.CarMake} {carmodel.CarModel}</option>
+          <option key={`${carmodel.CarMake}-${carmodel.CarModel}`} value={carmodel.CarMake+" "+carmodel.CarModel}>{carmodel.CarMake} {carmodel.CarModel}</option>
       ))}
       </select>        
       </div >
 
-      <div className='input_field'>
-      Car Year <input type="int" onChange={(e) => setYear(e.target.value)} max={2023} min={2015}/>
+      <div className='form-control-group'>
+      <label htmlFor="car-year">Car year</label>
+      <input id="car-year" type="number" onChange={(e) => setYear(e.target.value)} max={2023} min={2015}/>
       </div>
 
       <div>
-      <button className='postreview' onClick={postreview}>Post Review</button>
+      <button className='site-button' onClick={postreview}>Post review</button>
       </div>
-    </div>
+      </div>
+      </section>
+    </main>
     </div>
   )
 }

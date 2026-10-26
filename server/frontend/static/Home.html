@@ -1,64 +1,74 @@
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="static/style.css">
-  <link rel="stylesheet" href="static/bootstrap.min.css">
-<script>
-
-const logout = async (e) => {
-//Include the code for logout here.
-};
-
-let checkSession = ()=>{
-  let curr_user = sessionStorage.getItem("username");
-
-  if (curr_user && curr_user !== "") {
-    document.getElementById("loginlogout").innerHTML = 
-    '<span class="homepage_links">' + curr_user +'</span>' +
-    '<a class="homepage_links" onclick="logout()" href="/">Logout</a>'
-  } else {
-    document.getElementById("loginlogout").innerHTML = 
-    '<a class="homepage_links" href="/login">Login</a>'+
-    '<a class="homepage_links"  href="/register">Register</a>'
-  }
- }
-</script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dealerships | Find your next car</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body { margin: 0; background: #f4f8f9; color: #24333a; font-family: Arial, sans-serif; }
+    .home-hero { position: relative; display: grid; min-height: 450px; place-items: center; overflow: hidden; color: #fff; text-align: center; background: #12343a; }
+    .home-hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .44; }
+    .home-hero::after { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(8,34,39,.78), rgba(8,34,39,.25)); content: ""; }
+    .home-hero-content { position: relative; z-index: 1; width: min(760px, 90%); padding: 56px 16px; }
+    .home-hero h1 { margin-bottom: 14px; font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 700; }
+    .home-hero p { max-width: 620px; margin: 0 auto 24px; font-size: 1.15rem; line-height: 1.7; }
+    .home-eyebrow { margin-bottom: 10px !important; color: #baf4ef; font-size: .78rem !important; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+    .home-button { display: inline-block; padding: 12px 20px; border-radius: 6px; background: plum; color: #24333a; font-weight: 700; text-decoration: none; }
+    .home-button:hover { background: #c77bc7; color: #24333a; }
+    .home-intro { width: min(900px, 92%); margin: 0 auto; padding: 52px 0 64px; text-align: center; }
+    .home-intro h2 { margin-bottom: 14px; font-weight: 700; }
+    .home-intro p { margin: 0 auto; color: #5e6e74; font-size: 1.05rem; line-height: 1.8; }
+    .home-points { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; margin-top: 30px; text-align: left; }
+    .home-point { padding: 24px; border: 1px solid #e0e9eb; border-radius: 12px; background: #fff; box-shadow: 0 8px 24px rgba(24,54,61,.06); }
+    .home-point h3 { margin-bottom: 8px; color: #087f83; font-size: 1.1rem; font-weight: 700; }
+    .home-point p { margin: 0; color: #65757a; font-size: .95rem; }
+    .site-navbar { min-height: 76px; background: mediumspringgreen; }
+    .site-navbar .navbar-brand { color: #24333a; font-size: 1.45rem; font-weight: 700; }
+    .site-navbar .nav-link { color: #173f42; font-size: 1rem; font-weight: 600; }
+    @media (max-width: 760px) { .home-points { grid-template-columns: 1fr; } .home-hero { min-height: 370px; } }
+  </style>
 </head>
-<body onload="checkSession()">
-<nav class="navbar navbar-expand-lg navbar-light" style="background-color:darkturquoise; height: 1in;">
-  <div class="container-fluid">
-    <h2 style="padding-right: 5%;">Dealerships</h2>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarText">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" style="font-size: larger;" aria-current="page" href="#">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" style="font-size: larger;" href="/about">About Us</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" style="font-size: larger;" href="/contact">Contact Us</a>
-        </li>
-      </ul>
-      <span class="navbar-text">
-        <div class="loginlink" id="loginlogout">
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light site-navbar">
+    <div class="container-fluid px-4">
+      <a class="navbar-brand" href="/">Dealerships</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link active" href="/" aria-current="page">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="/about">About Us</a></li>
+          <li class="nav-item"><a class="nav-link" href="/contact">Contact Us</a></li>
+        </ul>
+        <div class="d-flex gap-3">
+          <a class="nav-link" href="http://localhost:3000/login">Login</a>
+          <a class="nav-link" href="http://localhost:3000/register">Register</a>
         </div>
-        </span>
+      </div>
     </div>
-  </div>
-</nav>
-<div style="display: flex;flex-direction: column;">
-<div class="card" style="width: 50%;margin-top: 50px;align-self: center;">
-  <img src="static/car_dealership.jpg" class="card-img-top" alt="...">
-  <div class="banner">
-    <h5>Welcome to our Dealerships!</h5>
-    <a href="/dealers" class="btn" style="background-color: aqua;margin:10px">View Dealerships</a>
-  </div>
-</div>
-</div>
+  </nav>
+  <main>
+    <section class="home-hero">
+      <img src="/static/car_dealership.jpg" alt="">
+      <div class="home-hero-content">
+        <p class="home-eyebrow">Find your next destination</p>
+        <h1>A better way to find your dealership</h1>
+        <p>Explore local dealerships and hear from drivers who have already made their choice.</p>
+        <a class="home-button" href="http://localhost:3000/dealers">Browse dealerships</a>
+      </div>
+    </section>
+    <section class="home-intro">
+      <h2>Shop with more confidence</h2>
+      <p>Find nearby dealerships, read customer reviews, and make your next car-buying decision with confidence.</p>
+      <div class="home-points">
+        <article class="home-point"><h3>Explore locally</h3><p>Browse dealership locations and find the right team close to home.</p></article>
+        <article class="home-point"><h3>Hear real stories</h3><p>Learn from customer experiences before you make your choice.</p></article>
+        <article class="home-point"><h3>Choose confidently</h3><p>Compare your options and take the next step with clarity.</p></article>
+      </div>
+    </section>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

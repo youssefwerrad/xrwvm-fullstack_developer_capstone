@@ -41,32 +41,30 @@ const Login = ({ onClose }) => {
   
 
   return (
-    <div>
+    <div className="auth-page">
       <Header/>
-    <div onClick={onClose}>
-      <div
+      <main className="auth-content" onClick={onClose}>
+      <section
         onClick={(e) => {
           e.stopPropagation();
         }}
-        className='modalContainer'
+        className="auth-card"
       >
-          <form className="login_panel" style={{}} onSubmit={login}>
-              <div>
-              <span className="input_field">Username </span>
-              <input type="text"  name="username" placeholder="Username" className="input_field" onChange={(e) => setUserName(e.target.value)}/>
-              </div>
-              <div>
-              <span className="input_field">Password </span>
-              <input name="psw" type="password"  placeholder="Password" className="input_field" onChange={(e) => setPassword(e.target.value)}/>            
-              </div>
-              <div>
-              <input className="action_button" type="submit" value="Login"/>
-              <input className="action_button" type="button" value="Cancel" onClick={()=>setOpen(false)}/>
-              </div>
-              <a className="loginlink" href="/register">Register Now</a>
-          </form>
-      </div>
-    </div>
+        <p className="eyebrow">Welcome back</p>
+        <h1>Sign in to your account</h1>
+        <form className="auth-form" onSubmit={login}>
+          <label htmlFor="username">Username</label>
+          <input id="username" type="text" name="username" placeholder="Your username" autoComplete="username" required onChange={(e) => setUserName(e.target.value)} />
+          <label htmlFor="password">Password</label>
+          <input id="password" name="psw" type="password" placeholder="Your password" autoComplete="current-password" required onChange={(e) => setPassword(e.target.value)} />
+          <div className="auth-actions">
+            <button className="site-button" type="submit">Login</button>
+            <button className="site-button site-button-secondary" type="button" onClick={() => setOpen(false)}>Cancel</button>
+          </div>
+          <p className="auth-footnote">New here? <a href="/register">Create an account</a></p>
+        </form>
+      </section>
+      </main>
     </div>
   );
 };

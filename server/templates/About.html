@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>About Us | Dealerships</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/static/style.css">
+  <style>
+    body { margin: 0; background: #f4f8f9; color: #24333a; font-family: Arial, sans-serif; }
+    .site-navbar { min-height: 76px; background: mediumspringgreen; }
+    .site-navbar .navbar-brand { color: #24333a; font-size: 1.45rem; font-weight: 700; }
+    .site-navbar .nav-link { color: #173f42; font-size: 1rem; font-weight: 600; }
+    .site-navbar .navbar-brand:hover, .site-navbar .nav-link:hover { color: #06676b; }
+    .about-hero { position: relative; display: grid; min-height: 340px; place-items: center; overflow: hidden; color: #fff; text-align: center; background: #12343a; }
+    .about-hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .44; }
+    .about-hero::after { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(8,34,39,.78), rgba(8,34,39,.25)); content: ""; }
+    .about-hero-content { position: relative; z-index: 1; width: min(760px, 90%); padding: 56px 16px; }
+    .about-hero h1 { margin-bottom: 14px; font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 700; }
+    .about-hero p { max-width: 620px; margin: 0 auto; font-size: 1.15rem; line-height: 1.7; }
+    .about-content { width: min(1080px, 92%); margin: 0 auto; padding: 54px 0 64px; }
+    .about-intro { max-width: 760px; margin: 0 auto 38px; text-align: center; }
+    .about-intro h2 { margin-bottom: 14px; font-weight: 700; }
+    .about-intro p { color: #5e6e74; font-size: 1.05rem; line-height: 1.8; }
+    .about-values { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
+    .about-value { padding: 26px; border: 1px solid #e0e9eb; border-radius: 12px; background: #fff; box-shadow: 0 8px 24px rgba(24,54,61,.06); }
+    .about-value-number { display: grid; width: 44px; height: 44px; margin-bottom: 18px; place-items: center; border-radius: 50%; background: #d9f5f4; color: #087f83; font-weight: 700; }
+    .about-value h3 { margin-bottom: 10px; font-size: 1.2rem; font-weight: 700; }
+    .about-value p { margin: 0; color: #65757a; line-height: 1.7; }
+    .about-cta { margin-top: 36px; padding: 28px; border-radius: 12px; background: #dff6f5; text-align: center; }
+    .about-cta p { margin: 0 0 14px; color: #35565a; }
+    .about-cta a { display: inline-block; padding: 10px 18px; border-radius: 6px; background: #087f83; color: #fff; font-weight: 700; text-decoration: none; }
+    .about-cta a:hover { background: #06676b; color: #fff; }
+    @media (max-width: 760px) { .about-values { grid-template-columns: 1fr; } .about-hero { min-height: 300px; } }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light site-navbar">
+    <div class="container-fluid px-4">
+      <a class="navbar-brand" href="/">Dealerships</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+          <li class="nav-item"><a class="nav-link active" href="/about" aria-current="page">About Us</a></li>
+          <li class="nav-item"><a class="nav-link" href="/contact">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <header class="about-hero">
+    <img src="/static/car_dealership.jpg" alt="">
+    <div class="about-hero-content">
+      <h1>Making your next drive easier</h1>
+      <p>We connect car shoppers with local dealerships and the real experiences of people who have been there.</p>
+    </div>
+  </header>
+
+  <main class="about-content">
+    <section class="about-intro">
+      <h2>A better way to find your dealership</h2>
+      <p>Choosing where to buy a car matters. Our directory brings dealerships together in one place, while customer reviews help you make a more informed decision with confidence.</p>
+    </section>
+
+    <section class="about-values" aria-label="What matters to us">
+      <article class="about-value">
+        <div class="about-value-number">01</div>
+        <h3>Local connections</h3>
+        <p>Explore dealerships by location and find options that are close to home.</p>
+      </article>
+      <article class="about-value">
+        <div class="about-value-number">02</div>
+        <h3>Real experiences</h3>
+        <p>Read customer reviews to learn what the buying experience was like.</p>
+      </article>
+      <article class="about-value">
+        <div class="about-value-number">03</div>
+        <h3>Confident choices</h3>
+        <p>Compare your options and choose a dealership that feels right for you.</p>
+      </article>
+    </section>
+
+    <section class="about-cta">
+      <p>Ready to find a dealership?</p>
+      <a href="http://localhost:3000/dealers">Browse dealerships</a>
+    </section>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

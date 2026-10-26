@@ -1,23 +1,30 @@
-version: '3.9'
-
 services:
-  # Mongodb service
   mongo_db:
     container_name: db_container
     image: mongo:latest
     ports:
-      - 27017:27017
+      - "27017:27017"
     restart: always
     volumes:
       - mongo_data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping').ok"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
-  # Node api service
   api:
+    build:
+      context: .
     image: nodeapp
+    environment:
+      MONGO_URL: mongodb://mongo_db:27017/dealershipsDB
     ports:
-      - 3030:3030
-    depends_on: 
-      - mongo_db
+      - "3030:3030"
+    depends_on:
+      mongo_db:
+        condition: service_healthy
+    restart: on-failure
 
 volumes:
   mongo_data: {}
